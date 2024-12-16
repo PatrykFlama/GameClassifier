@@ -30,16 +30,20 @@
 
 {\bf Goal and motivation}
 
-We want to be able to automatically assign game tags to games, using their description. \\
-It would allow automating this process or help with validation of manually assigned tags. \\
-In aspect of ML project we aim to compare different approaches to train a model.
+We want to be able to automatically assign tags to games, based on their description. \\
+Solution to such problem has real-world applications, such as game grouping/filtering or finding simmilar games or trends analysis. \\
+In aspect of ML project we want to make a small comparison of different models and data processing.
 
 \end{column}
+
+\pause
+
 \begin{column}[t]{0.5\textwidth}
 
 {\bf Info about the data}
 
-We will download the data with official Steam API, and since Steam is the largest game library, it will allow for a lot of diverse, high quality, data.
+Steam has its own official API, from which we want to download all of the data (and since Steam is the largest library it will allow for a lot of diverse, high quality, data). \\
+Currently there are above 100'000 games, which does create a large dataset.
 
 \end{column}
 \end{columns}
@@ -49,28 +53,21 @@ We will download the data with official Steam API, and since Steam is the larges
 
 \begin{frame}[t]{Methods}
 
-%\begin{columns}
-%\begin{column}{0.5\textwidth}
-%baselines
-%\end{column}
-%\begin{column}{0.5\textwidth}
-%advanced methods
-%\end{column}
-%\end{columns}	
-
-
-\begin{columns}
-\begin{column}[t]{0.5\textwidth}
-Preprocessing (dimension reduction)
+Data processing
 
 \begin{itemize}
-\item PCA
-\item t-SNE
-\item UMAP
+\item PCA (dimension reduction)
+\item t-SNE (dimension reduction)
+\item Bag of Words - binary vector records if word appears in text (input representation)
+\item TF-IDF - term frequency * inverse document frequency (input representation)
+\item multi label binary vector (output representation)
 \end{itemize}
-\end{column}
+\end{frame}
 
-\begin{column}[t]{0.5\textwidth}
+\begin{frame}[t]{Methods}
+
+\begin{columns}
+\begin{column}[t]{0.4\textwidth}
 Models
 
 \begin{itemize}
@@ -82,23 +79,19 @@ Models
 \end{itemize}
 \item Advanced
 \begin{itemize}
-    \item Naive Bayes
+	\item Naive Bayes
 \end{itemize}
 \end{itemize}
+
+\pause
+
 \end{column}
-\end{columns}
-\end{frame}
-
-
-\begin{frame}[t]{Evaluation}
-
-\begin{columns}
-\begin{column}[t]{0.5\textwidth}
-Evaluation Scenario, metrics
+\begin{column}[t]{0.6\textwidth}
+Evaluation
 
 \begin{itemize}
 \item Recall {\it TP/(TP+FN)} - we prefer to have more FN than to have an TP
-\item F1-score {\it (2 * recall * precision) / (precision + recall)} - we like the name, but also it combines precision with recall thus both TP and FN are equally expensive
+\item F1-score {\it (2 * precision * recall) / (precision + recall)} - nice name, but also it combines precision with recall thus both TP and FN are equally expensive
 \end{itemize}
 
 \end{column}
@@ -109,10 +102,9 @@ Evaluation Scenario, metrics
 
 
 \begin{frame}{Something funny}
-
-\includegraphics[width=0.5\linewidth]{assets/meme1.png}
-\includegraphics[width=0.5\linewidth]{assets/meme2.jpg}
-
+\center
+\only<1>{\includegraphics[width=0.9\linewidth]{assets/meme1.png}}
+\only<2>{\includegraphics[width=0.9\linewidth]{assets/meme2.jpg}}
 \end{frame}
 
 \end{document}
