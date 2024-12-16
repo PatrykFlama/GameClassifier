@@ -26,14 +26,20 @@
 \begin{frame}[t]{Your task}
 
 \begin{columns}
-\begin{column}{0.5\textwidth}
+\begin{column}[t]{0.5\textwidth}
 
 {\bf Goal and motivation}
 
+We want to be able to automatically assign game tags to games, using their description. \\
+It would allow automating this process or help with validation of manually assigned tags. \\
+In aspect of ML project we aim to compare different approaches to train a model.
+
 \end{column}
-\begin{column}{0.5\textwidth}
+\begin{column}[t]{0.5\textwidth}
 
 {\bf Info about the data}
+
+We will download the data with official Steam API, since Steam is the largest library it will allow for a lot of diverse, high quality, data.
 
 \end{column}
 \end{columns}
@@ -43,27 +49,60 @@
 
 \begin{frame}[t]{Methods}
 
-\begin{columns}
-	\begin{column}{0.5\textwidth}
-		baselines
-	\end{column}
-	\begin{column}{0.5\textwidth}
-		advanced methods
-	\end{column}
-\end{columns}	
+%\begin{columns}
+%\begin{column}{0.5\textwidth}
+%baselines
+%\end{column}
+%\begin{column}{0.5\textwidth}
+%advanced methods
+%\end{column}
+%\end{columns}	
 
+{\bf (We are not sure which are baseline and which are advanced since the lecture sucks)}
+
+\begin{columns}
+\begin{column}[t]{0.5\textwidth}
+Preprocessing (dimension reduction)
+
+\begin{itemize}
+\item PCA
+\item t-SNE
+\item UMAP
+\end{itemize}
+\end{column}
+
+\begin{column}[t]{0.5\textwidth}
+Models
+
+\begin{itemize}
+\item KNN
+\item Logistic Regression
+\item Naive Bayes
+\item Decision Trees + Random Forest
+\end{itemize}
+\end{column}
+\end{columns}
 \end{frame}
 
 
 \begin{frame}[t]{Evaluation}
 
 \begin{columns}
-	\begin{column}{0.5\textwidth}
-		Evaluation Scenario, metrics
-	\end{column}
-	\begin{column}{0.5\textwidth}
-		Something Funny
-	\end{column}
+\begin{column}[t]{0.5\textwidth}
+Evaluation Scenario, metrics
+
+\begin{itemize}
+\item Recall {\it (TP/(TP+FN)} - we prefer to have more FN than to have an TP
+\item F1-score {\it (2 * recall * precision) / (precision + recall)} - we like the name, but also it combines precision with recall thus both TP and FN are equally expensive
+\end{itemize}
+
+\end{column}
+\begin{column}[t]{0.5\textwidth}
+Something Funny
+
+Przychodzi Adamczyk prowadzić wykład, a tu rzutnik nie działa. HAHA \\
+
+\end{column}
 \end{columns}
 
 \end{frame}
