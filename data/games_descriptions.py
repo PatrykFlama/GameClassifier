@@ -7,7 +7,7 @@ from tqdm import tqdm
 
 input_file = "steam_games_list.json"
 output_file = "steam_games_descriptions.json"
-failed_output_file = "failed_appids.json"
+discarded_output_file = "discarded_appids.json"
 
 def beautify(text):
     # remove HTML tags
@@ -33,17 +33,28 @@ except FileNotFoundError as e:
 
 # result dictionary to store the descriptions
 descriptions = {}
-failed_appids = []
-index_progress = 0
+discarded_appids = []
 
 def save_progress():
     with open(output_file, "w") as file:
         json.dump(descriptions, file, indent=4)
-    with open(failed_output_file, "w") as file:
-        json.dump(failed_appids, file, indent=4)
-    with open("index_" + failed_output_file, "w") as file:
-        json.dump(index_progress, file, indent=4)
+    with open(discarded_output_file, "w") as file:
+        json.dump(discarded_appids, file, indent=4)
 
+
+# load progress if the output file already exists
+try:
+    with open(output_file, "r") as file:
+        descriptions = json.load(file)
+except FileNotFoundError:
+    pass
+
+# load failed appids if the file exists
+try:
+    with open(discarded_output_file, "r") as file:
+        discarded_appids = json.load(file)
+except FileNotFoundError:
+    pass
 
 # base URL for API request
 base_url = "https://store.steampowered.com/api/appdetails"
@@ -52,8 +63,13 @@ progress_bar = tqdm(data["applist"]["apps"], desc="Fetching game descriptions", 
 
 # loop through games and fetch description
 for index, app in enumerate(data["applist"]["apps"]):
-    if index > 100: exit() #! DEBUG
     appid = app["appid"]
+
+    # skip if already fetched
+    if str(appid) in descriptions or str(appid) in discarded_appids:
+        progress_bar.update(1)
+        continue
+
     try:
         # make API request
         response = requests.get(base_url, params={"appids": appid})
@@ -65,20 +81,21 @@ for index, app in enumerate(data["applist"]["apps"]):
                 detailed_description = beautify(detailed_description) # clean up the text
                 if(len(detailed_description) > 0):  # only save if description is not empty
                     descriptions[appid] = detailed_description
+        if descriptions.get(appid) is None:
+            progress_bar.set_postfix({"Error": f"Discarded appid {appid}: No data found"})
+            discarded_appids.append(appid)
     except Exception as e:
         progress_bar.set_postfix({"Error": f"Failed appid {appid}: {e}"})
-        failed_appids.append(appid)
     
     # save progress every N games
-    if (index + 1) % 10 == 0:
+    if (index + 1) % 100 == 0:
         save_progress()
     
     progress_bar.update(1)
-    index_progress = index
 
-    # sleep to avoid overwhelming the API (max 100'000 requests per day)
-    time.sleep(0.2)
-    # time.sleep(100000/(24*60*60))
+    # sleep to avoid overwhelming the API (max 100'000 requests per day) 
+    #! any requests need at least 100ms between them
+    time.sleep(100000/(24*60*60))
 
 # save all at the end
 save_progress()
