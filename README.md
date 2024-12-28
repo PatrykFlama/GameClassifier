@@ -8,8 +8,8 @@ Find fitting tags for your game, based on its description
   * [x] Python program that downloads game descriptions and tags from Steam, then saves them in file or database
   * [x] Python program that creates dictionary of words with their frequency
 * [ ] Create input preprocessors
-  * [ ] Bag of words
-  * [ ] TF-IDF
+  * [~] Bag of words
+  * [~] TF-IDF
   * [ ] Neural network
 * [ ] Create output preprocessors
   * [ ] Multi label binary vector
