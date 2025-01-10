@@ -141,3 +141,6 @@ notebook/templates/*.html
 
 # datasets
 *.json
+
+# models
+*.h5
