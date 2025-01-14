@@ -1,0 +1,117 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage[polish]{datetime2}
+
+\usepackage{tikz}
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+
+\title{Games classifier}
+
+\author[Team name]{Team name\\[5mm]
+{\small Members: Julia Cygan, Borys Adamiak, Patryk Flama}
+\hspace{18mm} 
+{\small Supervisor: Marek Adamczyk}}
+
+\institute{UWr}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+\begin{frame}[t]{Your task}
+
+\begin{columns}
+\begin{column}[t]{0.5\textwidth}
+
+{\bf Goal and motivation}
+
+We want to be able to automatically assign tags to games, based on their description. \\
+Solution to such problem has real-world applications, such as game grouping/filtering or finding simmilar games or trends analysis. \\
+In aspect of ML project we want to make a small comparison of different models and data processing.
+
+\end{column}
+
+\pause
+
+\begin{column}[t]{0.5\textwidth}
+
+{\bf Info about the data}
+
+Steam has its own official API, from which we want to download all of the data (and since Steam is the largest library it will allow for a lot of diverse, high quality, data). \\
+Currently there are above 100'000 games, which does create a large dataset.
+
+\end{column}
+\end{columns}
+
+\end{frame}
+
+
+\begin{frame}[t]{Methods}
+
+Data processing
+
+\begin{itemize}
+\item Bag of Words - binary vector records if word appears in text (input representation) \checkmark
+\item TF-IDF - term frequency * inverse document frequency (input representation) \checkmark
+\item multi label binary vector (output representation) \checkmark
+
+\pause
+
+\item Hashing input to low-dimensional vector \checkmark
+\end{itemize}
+\end{frame}
+
+\begin{frame}[t]{Methods}
+
+\begin{columns}
+\begin{column}[t]{0.45\textwidth}
+Models
+
+\begin{itemize}
+\item Baseline
+\begin{itemize}
+    \item KNN \checkmark
+    \item Logistic Regression \checkmark
+    \item Decision Trees + Random Forest \checkmark
+	\item Naive Bayes \checkmark
+	
+	\pause
+	
+	\item Simple perceptron-based neural network \checkmark
+	\item Support Vector Machine \checkmark
+\end{itemize}
+\end{itemize}
+
+\pause
+
+\end{column}
+\begin{column}[t]{0.6\textwidth}
+Evaluation
+
+\begin{itemize}
+\item Recall {\it TP/(TP+FN)} - we prefer to have more FN than to have an TP
+ \checkmark
+\item F1-score {\it (2 * precision * recall) / (precision + recall)} - nice name, but also it combines precision with recall thus both TP and FN are equally expensive \checkmark
+
+\pause
+
+\item Hammming loss
+\item Intersection over union score
+\item Exact match
+\end{itemize}
+
+\end{column}
+
+\end{columns}
+
+\end{frame}
+
+\end{document}
