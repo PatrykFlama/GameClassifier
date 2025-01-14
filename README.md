@@ -10,20 +10,21 @@ Find fitting tags for your game, based on its description
 * Create input encoders
   * [x] Bag of words
   * [x] TF-IDF
-  * [x] Something more advanced
+  * [x] Hashing vectorizer 
 * Create output encoders
   * [x] Multi label binary vector
-  * [ ] Something more advanced?
 * Create evaluation functions
   * [x] Recall TP/(TP+FN)
   * [x] F1-score (2 * precision * recall) / (precision + recall)
+  * [ ] Experiment with more evaluation functions
 * Create models
   * [x] KNN
   * [x] Logistic regression
   * [x] Decision trees
-  * [ ] Random forest
+  * [x] Random forest
   * [x] Naive Bayes
-  * [ ] **something more advanced** (probably neural network)
+  * [x] Simple neural network
+  * [x] Support Vector Machine
 * [ ] Combine everything into one sandbox notebook
-* [ ] cross validation
+* [ ] Add cross validation to models
 
