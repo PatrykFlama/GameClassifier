@@ -2,8 +2,11 @@
 \usetheme{Madrid}
 \usepackage{graphicx}
 \usepackage[T1]{fontenc}
-\usepackage[polish]{babel}
-\usepackage[polish]{datetime2}
+% \usepackage[polish]{babel}
+% \usepackage[polish]{datetime2}
+\usepackage{graphicx}
+\usepackage{caption}
+
 
 \usepackage{tikz}
 \def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
@@ -26,49 +29,90 @@
 \end{frame}
 
 
-\begin{frame}[t]{Your task}
+\begin{frame}[t]{Goal and motivation}
 
-\vspace{-0.5cm}
+{\bf Use case example:} \\
+Imagine that you run a online game store where users can add their games to your library. Instead of manually checking if user tagged correctly the game, you can use our model to do that job for you. \\
 
-\begin{columns}
-\begin{column}[t]{0.5\textwidth}
+\vspace{3mm}
 
-{\bf Goal and motivation}
+{\bf Goal:} \\
+We want to be able to automatically assign tags (or genres) to games, based on their (text) description.
 
-We want to be able to automatically assign tags (or genres) to games, based on their text description. \\
-Solution to such problem has real-world applications, such as game grouping/filtering or finding simmilar games or trends analysis. \\
-Additionally, in aspect of ML project, we want to make a small comparison of different models and data processing methods for such multilabel classification problem.
+\vspace{3mm}
 
-\end{column}
+Additionally, in aspect of ML project, we want to make a small comparison of different models and methods for solving such multilabel classification problem.
+\end{frame}
+
+\begin{frame}[t]{Info about the dataset}
+Steam has its own official API, from which we downloaded games, their descriptions, tags and genres. That resulted in a bit over {\it 200'000} games. \\
+\vspace{2mm}
+To clean the data we:
+\begin{itemize}
+	\item Converted descriptions to alphanumeric lowercase
+	\item Removed html tags
+	\item Removed empty descriptions or tags
+	\item (optional) Removed tags/genres that occured at most {\it n} times
+\end{itemize}
+After that we ended up with a dataset of size around {\it 50'000} games and {\it 400} unique tags or {\it 100} unique genres.
+
+\end{frame}
+
+
+\begin{frame}[t]{Data preprocessing}
+\only<1-3>{
+	To represent the output we decided to use multi label binary vector.
+	
+	\pause
+	\vspace{3mm}
+
+	For input preprocessing we tried:
+	\begin{itemize}
+		\item Bag of Words
+		\item TF-IDF
+		\item Hashing vectorizer
+	\end{itemize}
+	
+	\pause
+	\vspace{3mm}
+	We decided to check if there are some patterns in the data that we can use to improve our model. \\
+}
 
 \pause
+\only<4> {
+	\vspace{-3mm}
+	\begin{figure}[h]
+		\caption{PCA analysis on Bag of Words}
+		\centering
+		\includegraphics[width=0.73\linewidth]{images/pca_bow.png}
+	\end{figure}
+}
 
-\begin{column}[t]{0.5\textwidth}
+\pause
+\only<5> {
+	\vspace{-3mm}
+	\begin{figure}[h]
+		\caption{t-SNE 300 iterations + PCA to 50 on Bag of Words}
+		\centering
+		\includegraphics[width=0.73\linewidth]{images/tsne_300_bow.png}
+	\end{figure}
+}
 
-{\bf Info about the data}
+\pause
+\only<5>{
+	Here is comparison of those methods on model using Logistic Regression and F1-score as evaluation metric:
 
-Steam has its own official API, from which we want to download all of the data (and since Steam is the largest library it will allow for a lot of diverse, high quality, data). \\
-Currently there are above 100'000 games, which does create a large dataset. \\
-After cleaning the data (removing empty descriptions or tags, removing tags that occur only once) we ended up with a dataset of size around 50'000 games and 400 tags or 100 genres.
-
-\end{column}
-\end{columns}
+	\begin{center}
+		\includegraphics[width=0.73\linewidth]{images/LogisticRegression/f1score_compare_inprep.png}
+	\end{center}
+}
 
 \end{frame}
 
 
-\begin{frame}[t]{Methods}
 
-Data processing
 
-\begin{itemize}
-\item Bag of Words - binary vector records if word appears in text (input representation) \checkmark
-\item TF-IDF - term frequency * inverse document frequency (input representation) \checkmark
-\item Hashing vectorizer - method to generate low-dimensional input representation (input representation) \checkmark
-\item multi label binary vector (output representation) \checkmark
 
-\end{itemize}
-\end{frame}
 
 \begin{frame}[t]{Models}
 
