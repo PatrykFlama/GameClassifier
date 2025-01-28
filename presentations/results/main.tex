@@ -91,7 +91,7 @@ After that we ended up with a dataset of size around {\it 50'000} games and {\it
 \only<4> {
 	\vspace{-3mm}
 	\begin{figure}[h]
-		\caption{t-SNE 300 iterations + PCA to 50 on Bag of Words}
+		\caption{t-SNE 300 iterations + PCA to 500 on Bag of Words}
 		\centering
 		\includegraphics[width=0.73\linewidth]{images/tsne_300_bow.png}
 	\end{figure}
@@ -145,7 +145,7 @@ Since choosing proper evaluation function is a major part of our project (becaus
 \pause
 \item Exact match \\
 typical approach for one label - the prediction must be exact
-	
+
 \pause
 \item Precision {\it TP/(TP+FP)} \\
 we focus on minimizing FP
@@ -183,6 +183,16 @@ How would a loss function compare to score functions
 \only<2> {
 	\vspace{-3mm}
 	\begin{figure}[h]
+		\caption{Different number of neighbors}
+		\centering
+		\includegraphics[width=0.73\linewidth]{images/KNN/f1_score_over_k.png}
+	\end{figure}
+}
+
+\pause
+\only<3> {
+	\vspace{-3mm}
+	\begin{figure}[h]
 		\caption{Comparison of evaluations}
 		\centering
 		\includegraphics[width=0.73\linewidth]{images/KNN/score_every_eval.png}
@@ -199,7 +209,6 @@ How would a loss function compare to score functions
 	\end{figure}
 \end{frame}
 
-% TODO: add precision score	
 \begin{frame}[t]{Results - Decision Tree}
 \vspace{-3mm}
 \begin{figure}[h]
@@ -233,6 +242,12 @@ How would a loss function compare to score functions
 		\includegraphics[width=\linewidth]{images/DecisionTree/recall.png}
 		\caption{Recall}
 	\end{minipage}
+	\hfill
+	\begin{minipage}{0.3\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{images/DecisionTree/precision.png}
+		\caption{Precision}
+	\end{minipage}
 \end{figure}
 \end{frame}
 
@@ -255,6 +270,16 @@ How would a loss function compare to score functions
 		\includegraphics[width=0.73\linewidth]{images/RandomForest/compare_trees_depth100.png}
 	\end{figure}
 }
+
+\pause
+\only<3> {
+	\vspace{-3mm}
+	\begin{figure}[h]
+		\caption{Evaluation comparison}
+		\centering
+		\includegraphics[width=0.73\linewidth]{images/RandomForest/compare_evaluations.png}
+	\end{figure}
+}
 \end{frame}
 
 \begin{frame}[t]{Results - Support Vector Machine}
@@ -267,12 +292,24 @@ How would a loss function compare to score functions
 
 
 \begin{frame}[t]{Results - Neural Network}
+\only<1> {
 	\vspace{-3mm}
 	\begin{figure}[h]
 		\caption{Multilayer Perceptron}
 		\centering
 		\includegraphics[width=0.73\linewidth]{images/MLP/mlp_over_iters.png}
 	\end{figure}
+}
+
+\pause
+\only<2> {
+	\vspace{-3mm}
+	\begin{figure}[h]
+		\caption{Different evaluation methods}
+		\centering
+		\includegraphics[width=0.73\linewidth]{images/MLP/mlp_over_evals.png}
+	\end{figure}
+}
 \end{frame}
 
 
@@ -306,6 +343,14 @@ How would a loss function compare to score functions
 	\end{figure}
 \end{frame}
 
+\begin{frame}[t]{Results}
+	\vspace{-3mm}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.8\linewidth]{images/result_comparison.png}
+	\end{figure}
+\end{frame}
+
 \begin{frame}[t]{Conclusions}
 \begin{itemize}[<+->]
 	\item From the input preprocessors the most effective was {\bf TF-IDF} \\
@@ -318,6 +363,9 @@ How would a loss function compare to score functions
 	\item {\bf SVM} did not perform too bad, nor too good \\
 	we suspect that, based on how it works, it could {\bf eventually} perform way better (but that would require a lot of time)
 \end{itemize}
+\end{frame}
+
+\begin{frame}
 \end{frame}
 
 \end{document}
