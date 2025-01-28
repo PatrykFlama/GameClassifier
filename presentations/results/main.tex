@@ -237,22 +237,33 @@ this evaluation does not treat each label separately, but check ratio of interse
 \end{frame}
 
 \begin{frame}[t]{Results - Random Forest}
+\only<1>{
 	\vspace{-3mm}
 	\begin{figure}[h]
-		\caption{Comparison with different number of trees}
+		\caption{Different number of trees, no depth limit}
 		\centering
-		\includegraphics[width=0.73\linewidth]{images/RandomForest/compare_n_trees.png}
+		\includegraphics[width=0.73\linewidth]{images/RandomForest/compare_trees_nolimit.png}
 	\end{figure}
+}
+
+\pause
+\only<2>{
+	\vspace{-3mm}
+	\begin{figure}[h]
+		\caption{Different number of trees, depth limited to 100}
+		\centering
+		\includegraphics[width=0.73\linewidth]{images/RandomForest/compare_trees_depth100.png}
+	\end{figure}
+}
 \end{frame}
 
-% TODO
-% \begin{frame}[t]{Results - Support Vector Machine}
-% 	\vspace{-3mm}
-% 	\begin{figure}[h]
-% 		\centering
-% 		\includegraphics[width=0.8\linewidth]{images/SVM/f1_score.png}
-% 	\end{figure}
-% \end{frame}
+\begin{frame}[t]{Results - Support Vector Machine}
+	\vspace{-3mm}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.8\linewidth]{images/SVM/precision.png}
+	\end{figure}
+\end{frame}
 
 
 \begin{frame}[t]{Results - Neural Network}
@@ -297,12 +308,15 @@ this evaluation does not treat each label separately, but check ratio of interse
 
 \begin{frame}[t]{Conclusions}
 \begin{itemize}[<+->]
-	\item From the input preprocessors the most effective was TF-IDF
-	\item The best model was neural network, with random forest and logistic regression not far behind \\
+	\item From the input preprocessors the most effective was {\bf TF-IDF} \\
+	(that makes sense, as it carries the most information)
+	\item The best model was {\bf neural network}, with {\bf random forest} and {\bf logistic regression} not far behind \\
 	(additionally neural network was the most time consuming to train)
-	\item KNN indeed was far from the best model \\
-	but naive bayes, which was the fastest, was quite good
-	\item Decision trees were empirically proven (again) that they are not the best choice
+	\item {\bf KNN} indeed was far from beeing the best model \\
+	but {\bf naive bayes}, which was the fastest, was quite good
+	\item {\bf Decision trees} were empirically proven (again) that they are not the best choice
+	\item {\bf SVM} did not perform too bad, nor too good \\
+	we suspect that, based on how it works, it could {\bf eventually} perform way better (but that would require a lot of time)
 \end{itemize}
 \end{frame}
 
