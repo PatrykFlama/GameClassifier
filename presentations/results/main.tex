@@ -170,13 +170,35 @@ this evaluation does not treat each label separately, but check ratio of interse
 
 
 \begin{frame}[t]{Results - KNN}
+\only<1> {
 	\vspace{-3mm}
 	\begin{figure}[h]
-		\caption{KNN comparison with different number of neighbors}
+		\caption{Different number of neighbors}
 		\centering
 		\includegraphics[width=0.73\linewidth]{images/KNN/f1_score_over_k.png}
 	\end{figure}
+}
+
+\pause
+\only<2> {
+	\vspace{-3mm}
+	\begin{figure}[h]
+		\caption{Comparison of evaluations}
+		\centering
+		\includegraphics[width=0.73\linewidth]{images/KNN/score_every_eval.png}
+	\end{figure}
+}
 \end{frame}
+
+
+\begin{frame}[t]{Results - Logistic Regression}
+	\vspace{-3mm}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.8\linewidth]{images/LogisticRegression/none_l2_regularization.png}
+	\end{figure}
+\end{frame}
+
 
 \begin{frame}[t]{Results - Decision Tree}
 \vspace{-3mm}
@@ -214,7 +236,6 @@ this evaluation does not treat each label separately, but check ratio of interse
 \end{figure}
 \end{frame}
 
-% TODO compare different amt of trees
 \begin{frame}[t]{Results - Random Forest}
 	\vspace{-3mm}
 	\begin{figure}[h]
@@ -223,6 +244,16 @@ this evaluation does not treat each label separately, but check ratio of interse
 		\includegraphics[width=0.73\linewidth]{images/RandomForest/compare_n_trees.png}
 	\end{figure}
 \end{frame}
+
+% TODO
+% \begin{frame}[t]{Results - Support Vector Machine}
+% 	\vspace{-3mm}
+% 	\begin{figure}[h]
+% 		\centering
+% 		\includegraphics[width=0.8\linewidth]{images/SVM/f1_score.png}
+% 	\end{figure}
+% \end{frame}
+
 
 \begin{frame}[t]{Results - Neural Network}
 	\vspace{-3mm}
@@ -233,42 +264,45 @@ this evaluation does not treat each label separately, but check ratio of interse
 	\end{figure}
 \end{frame}
 
-\begin{frame}[t]{Logistic Regression}
-\only<1> {
-	\vspace{-3mm}
-	\begin{figure}[h]
-		\caption{Different input preprocessing methods}
-		\centering
-		\includegraphics[width=0.73\linewidth]{images/LogisticRegression/f1score_compare_inprep.png}
-	\end{figure}
-}
 
-\pause
-\only<2> {
+\begin{frame}[t]{Input preprocessing}
+\vspace{-3mm}
+\begin{figure}[h]
+	\caption{Logistic Regression, F1-score}
+	\centering
+	\includegraphics[width=0.73\linewidth]{images/LogisticRegression/f1score_compare_inprep.png}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}[t]{Evaluation metrics}
+\only<1>{
 	\vspace{-3mm}
 	\begin{figure}[h]
-		\caption{Different evaluation metrics}
+		\caption{Logistic Regression, F1-score}
 		\centering
 		\includegraphics[width=0.73\linewidth]{images/LogisticRegression/compare_evaluations.png}
 	\end{figure}
 }
+\end{frame}	
 
-\pause
-\only<3> {
+
+\begin{frame}[t]{Models Comparison}
 	\vspace{-3mm}
 	\begin{figure}[h]
-		\caption{Different regularization methods}
 		\centering
-		\includegraphics[width=0.73\linewidth]{images/LogisticRegression/none_l2_regularization.png}
+		\includegraphics[width=0.8\linewidth]{images/models_comparison.png}
 	\end{figure}
-}
 \end{frame}
-
 
 \begin{frame}[t]{Conclusions}
 \begin{itemize}[<+->]
-	\item yes
-	\item no
+	\item From the input preprocessors the most effective was TF-IDF
+	\item The best model was neural network, with random forest and logistic regression not far behind \\
+	(additionally neural network was the most time consuming to train)
+	\item KNN indeed was far from the best model \\
+	but naive bayes, which was the fastest, was quite good
+	\item Decision trees were empirically proven (again) that they are not the best choice
 \end{itemize}
 \end{frame}
 
