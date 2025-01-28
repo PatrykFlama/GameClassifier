@@ -28,3 +28,7 @@ Find fitting tags for your game, based on its description
 * [ ] Combine everything into one sandbox notebook
 * [ ] Add cross validation to models
 
+# Future work
+* [ ] add some fullstack app to wrap entire result model
+* [ ] play more with PCA decomposition and reverse-construct dictionary from it (dictionary of words perfectly describing games)
+
