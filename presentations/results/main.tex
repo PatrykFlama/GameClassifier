@@ -45,17 +45,27 @@ Additionally, in aspect of ML project, we want to make a small comparison of dif
 \end{frame}
 
 \begin{frame}[t]{Info about the dataset}
-Steam has its own official API, from which we downloaded games, their descriptions, tags and genres. That resulted in a bit over {\it 200'000} games. \\
-\vspace{2mm}
-To clean the data we:
-\begin{itemize}
-	\item Converted descriptions to alphanumeric lowercase
-	\item Removed html tags
-	\item Removed empty descriptions or tags
-	\item (optional) Removed tags/genres that occured at most {\it n} times
-\end{itemize}
-After that we ended up with a dataset of size around {\it 50'000} games and {\it 400} unique tags or {\it 100} unique genres.
+\only<1> {
+	Steam has its own official API, from which we downloaded games, their descriptions, tags and genres. That resulted in a bit over {\it 200'000} games. \\
+	\vspace{2mm}
+	To clean the data we:
+	\begin{itemize}
+		\item Converted descriptions to alphanumeric lowercase
+		\item Removed html tags
+		\item Removed empty descriptions or tags
+		\item (optional) Removed tags/genres that occured at most {\it n} times
+	\end{itemize}
+	After that we ended up with a dataset of size around {\it 50'000} games and {\it 400} unique tags or {\it 100} unique genres.
+}
 
+\pause
+\only<2>{
+	\vspace{-3mm}
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.5\linewidth]{images/data.png}
+	\end{figure}
+}
 \end{frame}
 
 
