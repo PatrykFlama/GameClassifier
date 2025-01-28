@@ -60,7 +60,7 @@ After that we ended up with a dataset of size around {\it 50'000} games and {\it
 
 
 \begin{frame}[t]{Data preprocessing}
-\only<1-3>{
+\only<1-2>{
 	To represent the output we decided to use multi label binary vector.
 	
 	\pause
@@ -73,13 +73,12 @@ After that we ended up with a dataset of size around {\it 50'000} games and {\it
 		\item Hashing vectorizer
 	\end{itemize}
 	
-	\pause
 	\vspace{3mm}
 	We decided to check if there are some patterns in the data that we can use to improve our model. \\
 }
 
 \pause
-\only<4> {
+\only<3> {
 	\vspace{-3mm}
 	\begin{figure}[h]
 		\caption{PCA analysis on Bag of Words}
@@ -89,7 +88,7 @@ After that we ended up with a dataset of size around {\it 50'000} games and {\it
 }
 
 \pause
-\only<5> {
+\only<4> {
 	\vspace{-3mm}
 	\begin{figure}[h]
 		\caption{t-SNE 300 iterations + PCA to 50 on Bag of Words}
@@ -98,94 +97,125 @@ After that we ended up with a dataset of size around {\it 50'000} games and {\it
 	\end{figure}
 }
 
-\pause
-\only<5>{
-	Here is comparison of those methods on model using Logistic Regression and F1-score as evaluation metric:
-
-	\begin{center}
-		\includegraphics[width=0.73\linewidth]{images/LogisticRegression/f1score_compare_inprep.png}
-	\end{center}
-}
-
 \end{frame}
-
-
-
-
 
 
 \begin{frame}[t]{Models}
 
+\vspace{-3mm}
+
 \begin{itemize}
-    \item KNN \checkmark
-    \item Logistic Regression \checkmark
-    \item Decision Trees + Random Forest \checkmark
-	\item Naive Bayes \checkmark
-	\item Simple perceptron-based neural network \checkmark
-	\item Support Vector Machine \checkmark
+\item KNN \\
+Seemed to be a good baseline for our project, since its so simple
+
+\pause
+\item Naive Bayes \\
+Also quite simple in practice, but a bit more interesting in the context of text classification
+
+\pause
+\item Logistic Regression \\
+Classical approach
+
+\pause
+\item Decision Trees \\
+Do not have the best reputation, so we wanted to check how they perform
+
+\pause
+\item Random Forest \\
+Natural extension of Decision Trees
+
+\pause
+\item Simple perceptron-based neural network \\
+It is a neural network, thus we could not skip it
+
+\pause
+\item Support Vector Machine \\
+Interesting concept
 \end{itemize}
 \end{frame}
 
 \begin{frame}[t]{Evaluation}
-\only<1-2>{
-After analyzing the problem we came to conclusion that evaluaion methods are very interesing and important part of this project.
+
+\vspace{-3mm}
+
+Since choosing proper evaluation function is a major part of our project (because we have specific multi-label classification) we decided to use following metrics:
+	
+\begin{itemize}
+	
+\pause
+\item Exact match \\
+typical approach for one label - the prediction must be exact
+	
+\pause
+\item Precision {\it TP/(TP+FP)} \\
+we focus on minimizing FP
 
 \pause
-
-\begin{itemize}
-	\item We dont want to falsely assign a tag to a game that should not have it
-	\item Its more important to assing high percentage of tags to games, than to assign as many as possible
-	\begin{itemize}
-		\item Game should have 10 tags, but we only assign 8 (not bad)
-		\item Game should have 1 tag, but we do not assign any (this is worse) 
-	\end{itemize}
-\end{itemize}
-}
+\item Recall {\it TP/(TP+FN)} \\
+we focus on minimizing FN
 
 \pause
+\item F1-score {\it (2 * precision * recall) / (precision + recall)} \\
+combines precision and recall
 
-\begin{itemize}
-\item Recall {\it TP/(TP+FN)} - we prefer to have more FN than to have an TP
- \checkmark
-\item F1-score {\it (2 * precision * recall) / (precision + recall)} - nice name, but also it combines precision with recall thus both TP and FN are equally expensive \checkmark
+\pause
+\item Hammming loss \\
+it is a loss function, which calculates fraction of wrong labels
 
-\item Hammming loss
-\item Intersection over union score
-\item Exact match
-
+\pause
+\item Intersection over union score \\
+this evaluation does not treat each label separately, but check ratio of intersection and union
 \end{itemize}
-
-
 \end{frame}
 
 
-\begin{frame}[t]{Input data}
-\only<1>{First we tried some unsupervised methods to check if we can find some patterns in the data}
-	
-\centering
-
-\only<2-3>{
-	PCA on Bag of Words representation of the data (to 10'000 words) \\
-	\includegraphics[width=0.6\textwidth,height=0.6\textheight,keepaspectratio]{images/pca_bow.png} % Replace with your image file
-	
-	\pause
-	
-	Nice, out of 10'000 dimensions we can create ~100 that 'explain' about half of the data.
-}
-
-\only<4-5>{
-	t-SNE representation of same data \\
-	\includegraphics[width=0.6\textwidth,height=0.6\textheight,keepaspectratio]{images/tsne_300_bow.png} % Replace with your image file
-	
-	\pause
-	
-	And it does not look that helpful :<
-}
-
-\only<5-6>{
-	But what about combining PCA with t-SNE?
-}
-
+\begin{frame}[t]{Results - KNN}
+	\vspace{-3mm}
+	\begin{figure}[h]
+		\caption{KNN comparison with different number of neighbors}
+		\centering
+		\includegraphics[width=0.73\linewidth]{images/KNN/f1_score_over_k.png}
+	\end{figure}
 \end{frame}
+
+\begin{frame}[t]{Results - Decision Tree}
+\vspace{-3mm}
+\begin{figure}[h]
+	\centering
+	\begin{minipage}{0.3\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{images/DecisionTree/exactmatch.png}
+		\caption{Exact match}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.3\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{images/DecisionTree/f1_score.png}
+		\caption{F1-score}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.3\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{images/DecisionTree/hammingloss.png}
+		\caption{Hamming loss}
+	\end{minipage}
+	\vfill
+	\begin{minipage}{0.3\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{images/DecisionTree/jaccardscore.png}
+		\caption{Intersection}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.3\textwidth}
+		\centering
+		\includegraphics[width=\linewidth]{images/DecisionTree/recall.png}
+		\caption{Recall}
+	\end{minipage}
+\end{figure}
+\end{frame}
+
+
+
+
 
 \end{document}
