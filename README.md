@@ -1,7 +1,7 @@
 # GameClassifier
 Find fitting tags for your game, based on its description
 
-## [Presentation with results](./presentations/results/main.pdf)
+## [Presentation with results](./presentations/results)
 
 ## [Project HackMD](https://hackmd.io/vwPnLpSrQzGLLLdzyfqvCw?view)
 
